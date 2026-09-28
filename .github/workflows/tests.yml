@@ -16,14 +16,18 @@ jobs:
   formula:
     strategy:
       matrix:
-        os: [macos-latest]
         include:
+          - os: macos-latest
+            home: /Users/runner
           - os: ubuntu-latest
+            home: /home/linuxbrew
             container:
               image: ghcr.io/homebrew/brew:latest
               options: --privileged
     runs-on: ${{ matrix.os }}
     container: ${{ fromJSON(toJSON(matrix.container)) }}
+    env:
+      HOME: ${{ matrix.home }}
     steps:
       - name: Fetch this public revision
         run: |
