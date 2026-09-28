@@ -38,5 +38,7 @@ class Kmx < Formula
   test do
     assert_equal "kmx v#{version} (release build)",
                  shell_output("#{bin}/kmx version").lines.first.chomp
+    assert_match "Create, inspect, and chat with Orka agents",
+                 shell_output("#{bin}/kmx agent --help")
   end
 end
