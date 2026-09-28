@@ -21,9 +21,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     container: ${{ fromJSON(toJSON(matrix.container)) }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
-          persist-credentials: false
+      - name: Fetch this public revision
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/homebrew-tap
+          git init /tmp/homebrew-tap
+          git -C /tmp/homebrew-tap remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          git -C /tmp/homebrew-tap fetch --depth=1 origin "$GITHUB_REF"
+          git -C /tmp/homebrew-tap checkout --detach FETCH_HEAD
       - name: Add this checkout as the tap
         run: |
           set -euo pipefail
@@ -31,7 +36,7 @@ jobs:
           tap="$tap_parent/homebrew-tap"
           mkdir -p "$tap_parent"
           rm -rf "$tap"
-          ln -s "$GITHUB_WORKSPACE" "$tap"
+          ln -s /tmp/homebrew-tap "$tap"
           brew trust kaimahi-agents/tap
       - run: brew style kaimahi-agents/tap/kmx
       - run: brew audit --strict --online kaimahi-agents/tap/kmx
