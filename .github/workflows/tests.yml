@@ -12,25 +12,27 @@ jobs:
   formula:
     strategy:
       matrix:
-        os: [macos-26, ubuntu-latest]
+        os: [macos-latest]
+        include:
+          - os: ubuntu-latest
+            container:
+              image: ghcr.io/homebrew/brew:latest
+              options: --privileged
     runs-on: ${{ matrix.os }}
-    permissions:
-      actions: read
-      checks: read
-      contents: read
-      pull-requests: read
+    container: ${{ fromJSON(toJSON(matrix.container)) }}
     steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@848c272c7bfe984a197bd4d16383f4c106ec61e6 # 2026.09.21.1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cache Homebrew Bundler RubyGems
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.os }}-rubygems-
+          persist-credentials: false
+      - name: Add this checkout as the tap
+        run: |
+          set -euo pipefail
+          tap_parent="$(brew --repository)/Library/Taps/kaimahi-agents"
+          tap="$tap_parent/homebrew-tap"
+          mkdir -p "$tap_parent"
+          rm -rf "$tap"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+          brew trust kaimahi-agents/tap
       - run: brew style kaimahi-agents/tap/kmx
       - run: brew audit --strict --online kaimahi-agents/tap/kmx
       - run: brew readall --os=all --arch=all kaimahi-agents/tap
