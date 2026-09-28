@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
 jobs:
   formula:
     strategy:
