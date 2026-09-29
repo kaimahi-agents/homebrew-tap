@@ -28,6 +28,7 @@ jobs:
     container: ${{ fromJSON(toJSON(matrix.container)) }}
     env:
       HOME: ${{ matrix.home }}
+      HOMEBREW_NO_AUTO_UPDATE: "1"
     steps:
       - name: Fetch this public revision
         run: |
