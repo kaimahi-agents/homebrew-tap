@@ -46,6 +46,21 @@ jobs:
           rm -rf "$tap"
           ln -s /tmp/homebrew-tap "$tap"
           brew trust kaimahi-agents/tap
+      - name: Formula matches its stable release asset
+        run: |
+          set -euo pipefail
+          formula=/tmp/homebrew-tap/Formula/kmx.rb
+          version=$(brew info --json=v2 kaimahi-agents/tap/kmx | ruby -rjson -e 'puts JSON.parse(STDIN.read).fetch("formulae").first.fetch("versions").fetch("stable")')
+          if [ "$version" = 0.2.0 ]; then
+            count=$(grep -c 'releases/download/v0.2.0/kmx-' "$formula" || true)
+            test "$count" -eq 4
+            echo "v0.2.0 is the audited bootstrap release; it predates kmx.rb release assets"
+          else
+            curl -fsSL \
+              "https://github.com/kaimahi-agents/kaimahi/releases/download/v$version/kmx.rb" \
+              -o /tmp/release-kmx.rb
+            cmp /tmp/release-kmx.rb "$formula"
+          fi
       - run: brew style kaimahi-agents/tap/kmx
       - run: brew audit --strict --online kaimahi-agents/tap/kmx
       - run: brew readall --os=all --arch=all kaimahi-agents/tap
