@@ -49,5 +49,7 @@ jobs:
       - run: brew style kaimahi-agents/tap/kmx
       - run: brew audit --strict --online kaimahi-agents/tap/kmx
       - run: brew readall --os=all --arch=all kaimahi-agents/tap
+      - run: brew fetch --force --all-platforms kaimahi-agents/tap/kmx
+        if: runner.os == 'macOS'
       - run: brew install kaimahi-agents/tap/kmx
       - run: brew test kaimahi-agents/tap/kmx
