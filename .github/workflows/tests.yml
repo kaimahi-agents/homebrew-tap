@@ -50,7 +50,7 @@ jobs:
         run: |
           set -euo pipefail
           formula=/tmp/homebrew-tap/Formula/kmx.rb
-          version=$(brew info --json=v2 kaimahi-agents/tap/kmx | ruby -rjson -e 'puts JSON.parse(STDIN.read).fetch("formulae").first.fetch("versions").fetch("stable")')
+          version=$(brew info --json=v2 kaimahi-agents/tap/kmx | brew ruby -rjson -e 'puts JSON.parse(STDIN.read).fetch("formulae").first.fetch("versions").fetch("stable")')
           if [ "$version" = 0.2.0 ]; then
             count=$(grep -c 'releases/download/v0.2.0/kmx-' "$formula" || true)
             test "$count" -eq 4
