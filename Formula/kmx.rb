@@ -9,25 +9,25 @@ class Kmx < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.2.0/kmx-darwin-arm64", using: :nounzip
-      sha256 "ffecd978cde90c7267df8fdb4a5d7fe6c43f85375033ffedc33dabcbd32c7954"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.3.0/kmx-darwin-arm64", using: :nounzip
+      sha256 "3b36e698f00e1f15b8c8e11c587baded36aa25c4d3f491b4c72977d36ec486a3"
     end
 
     on_intel do
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.2.0/kmx-darwin-amd64", using: :nounzip
-      sha256 "5f2f38fb80ed39291f05e5fc139517a794efc90de5f778ae0a0f593f73d84969"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.3.0/kmx-darwin-amd64", using: :nounzip
+      sha256 "94b29cb28331cadfa62823fae3a22ddddbde94b1709bffde250f8b3ac473bbab"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.2.0/kmx-linux-arm64", using: :nounzip
-      sha256 "95480d2c1cf41a004e74eabf6685728c033ae472847c63e75d03f44d5c73dcbc"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.3.0/kmx-linux-arm64", using: :nounzip
+      sha256 "9919988bc119dd556d8a48b2bea02a9bc7c9461628e116d0c025332bdc52fdcc"
     end
 
     on_intel do
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.2.0/kmx-linux-amd64", using: :nounzip
-      sha256 "44c3a3d48c9c6f6c601aff8a4bcbb3ee4ab5266947ad38f8b0ffbd825e8c7b9e"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.3.0/kmx-linux-amd64", using: :nounzip
+      sha256 "7f9ecafdea7171ed3c49023df666a71652ad05c1aa735ffa60354d4ddab1b877"
     end
   end
 
