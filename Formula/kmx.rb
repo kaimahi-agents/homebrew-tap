@@ -9,16 +9,16 @@ class Kmx < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-darwin-amd64"
-      sha256 "7bb86da8a036a57716b7fc79ef06410a007da9c2aa699f95b58a1221a8d1f3aa"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.0/kmx-darwin-amd64"
+      sha256 "6c70efb9eb668867ab7de1a97c325eaa91a01dfe90ccecf2aa979cea390e9ddb"
 
       define_method(:install) do
         bin.install "kmx-darwin-amd64" => "kmx"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-darwin-arm64"
-      sha256 "7b00909ed199a8beb9c557316737db68488945f4850248a520981034549b946f"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.0/kmx-darwin-arm64"
+      sha256 "2040893257e3973bc12dd0343300d13f221b9ead30dbe4a3f7e842f6324afc55"
 
       define_method(:install) do
         bin.install "kmx-darwin-arm64" => "kmx"
@@ -28,15 +28,15 @@ class Kmx < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-linux-amd64"
-      sha256 "b5d6f24eaf06004f69d010e03d8f79352ae0ad2c4ae27bebf542840ae11971d0"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.0/kmx-linux-amd64"
+      sha256 "c5b8bf0c372f60abd572581c7dc556cbbae6115bed7600e84aa37e363b414181"
       define_method(:install) do
         bin.install "kmx-linux-amd64" => "kmx"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-linux-arm64"
-      sha256 "ae6a27c656804311341eb0c8adf3f1129dfb92fee1cea53f344ec89ba5e44295"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.0/kmx-linux-arm64"
+      sha256 "2a3f16c121353e7e00d68b85ab0f4faffd5aff523be0855cdd0de4d8a29aba87"
       define_method(:install) do
         bin.install "kmx-linux-arm64" => "kmx"
       end
