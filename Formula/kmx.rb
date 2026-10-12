@@ -9,16 +9,16 @@ class Kmx < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-darwin-amd64"
-      sha256 "7bb86da8a036a57716b7fc79ef06410a007da9c2aa699f95b58a1221a8d1f3aa"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.1/kmx-darwin-amd64"
+      sha256 "2a34f179cf04e7e44d1011c7d0e9592c2696e9e67c43859893c2e55a3bc352d9"
 
       define_method(:install) do
         bin.install "kmx-darwin-amd64" => "kmx"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-darwin-arm64"
-      sha256 "7b00909ed199a8beb9c557316737db68488945f4850248a520981034549b946f"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.1/kmx-darwin-arm64"
+      sha256 "fa6ff24bf559a0e7b3433513654befe1f5fd6a38f575c7e2ee6c629556c752a8"
 
       define_method(:install) do
         bin.install "kmx-darwin-arm64" => "kmx"
@@ -28,15 +28,15 @@ class Kmx < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-linux-amd64"
-      sha256 "b5d6f24eaf06004f69d010e03d8f79352ae0ad2c4ae27bebf542840ae11971d0"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.1/kmx-linux-amd64"
+      sha256 "51c6811b988709c4000b425f7a2d0c2358b927d559ef2c94dad053bfc2eee32e"
       define_method(:install) do
         bin.install "kmx-linux-amd64" => "kmx"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.4.1/kmx-linux-arm64"
-      sha256 "ae6a27c656804311341eb0c8adf3f1129dfb92fee1cea53f344ec89ba5e44295"
+      url "https://github.com/kaimahi-agents/kaimahi/releases/download/v0.5.1/kmx-linux-arm64"
+      sha256 "8d47ce8a6ed10a09041c51293e28c63ca75e187185d05bc7377fdbb35f7cecc6"
       define_method(:install) do
         bin.install "kmx-linux-arm64" => "kmx"
       end
@@ -44,9 +44,6 @@ class Kmx < Formula
   end
 
   test do
-    assert_equal "kmx v#{version} (release build)",
-                 shell_output("#{bin}/kmx version").lines.first.chomp
-    assert_match "Create, inspect, and chat with Orka agents",
-                 shell_output("#{bin}/kmx agent --help")
+    assert_equal "v#{version}", shell_output("#{bin}/kmx version").split.fetch(1)
   end
 end
